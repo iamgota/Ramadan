@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>برنامج رمضان المبارك ١٤٤٦ هـ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700;800;900&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-deep: #0d3320;
+    --green-dark: #1a4d2e;
+    --green-mid: #2d6a4f;
+    --green-light: #52b788;
+    --green-pale: #95d5b2;
+    --gold: #d4af37;
+    --gold-light: #f0d060;
+    --gold-dim: #b8942a;
+    --cream: #fdf6e3;
+    --cream-dark: #f5ead0;
+    --fajr: #1e3a5f;
+    --fajr-light: #2e5e9e;
+    --asr: #3d1a5e;
+    --asr-light: #7b35b0;
+    --isha: #1a2e5e;
+    --isha-light: #2e4ea0;
+    --text-dark: #1a1207;
+    --text-mid: #3d3020;
+    --stars-color: rgba(212,175,55,0.6);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Tajawal', sans-serif;
+    background: var(--green-deep);
+    color: var(--cream);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ===== STARFIELD ===== */
+  .stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle var(--dur, 3s) ease-in-out infinite var(--delay, 0s);
+  }
+  @keyframes twinkle {
+    0%,100% { opacity: 0.1; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.3); }
+  }
+
+  /* ===== MOON ===== */
+  .moon-container {
+    position: fixed;
+    top: 30px;
+    left: 50px;
+    z-index: 0;
+    pointer-events: none;
+    animation: moonFloat 8s ease-in-out infinite;
+  }
+  .moon {
+    width: 90px;
+    height: 90px;
+    background: radial-gradient(circle at 35% 35%, var(--gold-light), var(--gold), var(--gold-dim));
+    border-radius: 50%;
+    box-shadow: 0 0 40px rgba(212,175,55,0.5), 0 0 80px rgba(212,175,55,0.2);
+    position: relative;
+    overflow: hidden;
+  }
+  .moon::after {
+    content: '';
+    position: absolute;
+    top: -10px; right: -20px;
+    width: 75px; height: 75px;
+    background: var(--green-deep);
+    border-radius: 50%;
+  }
+  @keyframes moonFloat {
+    0%,100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-15px) rotate(5deg); }
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 80px 20px 60px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, transparent 100%);
+  }
+  .bismillah {
+    font-family: 'Scheherazade New', serif;
+    font-size: clamp(1.4rem, 4vw, 2.2rem);
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    margin-bottom: 24px;
+    animation: fadeDown 1s ease both;
+    text-shadow: 0 0 30px rgba(212,175,55,0.4);
+  }
+  .header-ornament {
+    color: var(--gold);
+    font-size: 1.4rem;
+    letter-spacing: 8px;
+    animation: fadeDown 1s ease 0.2s both;
+    margin-bottom: 20px;
+  }
+  h1 {
+    font-family: 'Amiri', serif;
+    font-size: clamp(2rem, 6vw, 4rem);
+    font-weight: 700;
+    color: var(--cream);
+    text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+    line-height: 1.3;
+    animation: fadeDown 1s ease 0.3s both;
+    margin-bottom: 12px;
+  }
+  .subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--green-pale);
+    font-weight: 300;
+    animation: fadeDown 1s ease 0.4s both;
+    margin-bottom: 40px;
+  }
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== PILLARS ROW ===== */
+  .pillars {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    animation: fadeDown 1s ease 0.5s both;
+    padding: 0 20px;
+    margin-bottom: 60px;
+  }
+  .pillar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+  }
+  .pillar.fajr { background: rgba(30,58,95,0.6); color: #90caf9; }
+  .pillar.asr  { background: rgba(61,26,94,0.6); color: #ce93d8; }
+  .pillar.isha { background: rgba(26,46,94,0.6); color: #9fa8da; }
+  .pillar.quran { background: rgba(180,135,0,0.35); color: var(--gold-light); }
+  .pillar-icon { font-size: 1.3rem; }
+
+  /* ===== MAIN CONTAINER ===== */
+  .container {
+    position: relative;
+    z-index: 10;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  /* ===== WEEK NAVIGATION ===== */
+  .week-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+  .week-btn {
+    padding: 10px 24px;
+    border-radius: 50px;
+    border: 1.5px solid rgba(212,175,55,0.3);
+    background: rgba(255,255,255,0.04);
+    color: var(--cream);
+    font-family: 'Tajawal', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.02em;
+  }
+  .week-btn:hover, .week-btn.active {
+    background: var(--gold);
+    color: var(--green-deep);
+    border-color: var(--gold);
+    box-shadow: 0 0 20px rgba(212,175,55,0.4);
+    transform: translateY(-2px);
+  }
+
+  /* ===== DAY CARD ===== */
+  .days-grid {
+    display: grid;
+    gap: 20px;
+  }
+  .day-card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    animation: cardIn 0.5s ease both;
+    backdrop-filter: blur(5px);
+  }
+  .day-card:hover {
+    border-color: rgba(212,175,55,0.5);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.3), 0 0 30px rgba(212,175,55,0.1);
+    transform: translateY(-3px);
+  }
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== DAY HEADER ===== */
+  .day-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+    background: linear-gradient(90deg, rgba(212,175,55,0.1), rgba(212,175,55,0.05), transparent);
+    border-bottom: 1px solid rgba(212,175,55,0.15);
+    cursor: pointer;
+    user-select: none;
+  }
+  .day-number-badge {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Amiri', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--green-deep);
+    flex-shrink: 0;
+    box-shadow: 0 0 15px rgba(212,175,55,0.3);
+  }
+  .day-title-area {
+    flex: 1;
+    padding: 0 16px;
+  }
+  .day-label {
+    font-size: 0.75rem;
+    color: var(--gold);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 3px;
+    opacity: 0.8;
+  }
+  .day-preview {
+    font-size: 0.9rem;
+    color: var(--cream);
+    opacity: 0.7;
+    font-weight: 300;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 500px;
+  }
+  .day-chevron {
+    color: var(--gold);
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+  }
+  .day-card.open .day-chevron { transform: rotate(180deg); }
+
+  /* ===== DAY BODY ===== */
+  .day-body {
+    display: none;
+    padding: 24px;
+    gap: 16px;
+    animation: expandIn 0.3s ease;
+  }
+  .day-card.open .day-body { display: grid; }
+  @keyframes expandIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== LESSON CARDS ===== */
+  .lessons-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  @media (max-width: 700px) {
+    .lessons-row { grid-template-columns: 1fr; }
+  }
+  .lesson-card {
+    border-radius: 14px;
+    padding: 16px;
+    border: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  .lesson-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.08;
+  }
+  .lesson-card.fajr  { background: rgba(30,58,95,0.5); border-color: rgba(144,202,249,0.2); }
+  .lesson-card.asr   { background: rgba(61,26,94,0.5); border-color: rgba(206,147,216,0.2); }
+  .lesson-card.isha  { background: rgba(26,46,94,0.5); border-color: rgba(159,168,218,0.2); }
+
+  .lesson-time {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .lesson-card.fajr .lesson-time { color: #90caf9; }
+  .lesson-card.asr  .lesson-time { color: #ce93d8; }
+  .lesson-card.isha .lesson-time { color: #9fa8da; }
+
+  .lesson-category {
+    font-size: 0.75rem;
+    opacity: 0.6;
+    margin-bottom: 8px;
+    font-weight: 300;
+  }
+  .lesson-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.5;
+    color: var(--cream);
+  }
+
+  /* ===== QURAN ROW ===== */
+  .quran-row {
+    background: linear-gradient(90deg, rgba(212,175,55,0.12), rgba(212,175,55,0.05));
+    border: 1px solid rgba(212,175,55,0.25);
+    border-radius: 12px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .quran-icon { font-size: 1.4rem; }
+  .quran-label {
+    font-size: 0.75rem;
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+  .quran-content {
+    font-size: 0.9rem;
+    color: var(--cream);
+    font-weight: 500;
+  }
+  .quran-range {
+    font-size: 0.8rem;
+    color: var(--green-pale);
+    font-weight: 300;
+    margin-right: auto;
+  }
+
+  /* ===== OVERVIEW TABLE ===== */
+  .overview-section {
+    margin-top: 60px;
+    animation: fadeUp 0.8s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .section-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .section-title {
+    font-family: 'Amiri', serif;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .section-sub {
+    font-size: 0.9rem;
+    color: var(--green-pale);
+    font-weight: 300;
+  }
+  .ornament-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 12px 0;
+    color: var(--gold);
+    font-size: 1.1rem;
+    opacity: 0.6;
+  }
+  .ornament-line::before,
+  .ornament-line::after {
+    content: '';
+    height: 1px;
+    width: 80px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  /* ===== FULL TABLE ===== */
+  .full-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+  .full-table thead tr {
+    background: linear-gradient(90deg, var(--gold-dim), var(--gold-dim));
+    color: var(--green-deep);
+  }
+  .full-table th {
+    padding: 14px 12px;
+    font-weight: 800;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    text-align: center;
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+  .full-table td {
+    padding: 11px 12px;
+    border: 1px solid rgba(212,175,55,0.1);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .full-table tr:nth-child(even) td { background: rgba(255,255,255,0.03); }
+  .full-table tr:hover td { background: rgba(212,175,55,0.06); }
+  .full-table .day-num { text-align: center; font-weight: 800; color: var(--gold); font-family: 'Amiri', serif; font-size: 1rem; }
+  .full-table .fajr-cell { color: #90caf9; }
+  .full-table .asr-cell  { color: #ce93d8; }
+  .full-table .isha-cell { color: #9fa8da; }
+  .table-wrapper {
+    overflow-x: auto;
+    border-radius: 16px;
+    border: 1px solid rgba(212,175,55,0.2);
+    background: rgba(0,0,0,0.25);
+  }
+
+  /* ===== QURAN TABLE ===== */
+  .quran-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+  .quran-table thead tr {
+    background: rgba(180,135,0,0.35);
+    color: var(--gold-light);
+  }
+  .quran-table th {
+    padding: 12px 14px;
+    font-weight: 800;
+    text-align: center;
+    border: 1px solid rgba(212,175,55,0.15);
+    font-size: 0.8rem;
+  }
+  .quran-table td {
+    padding: 10px 14px;
+    border: 1px solid rgba(212,175,55,0.1);
+    text-align: center;
+    line-height: 1.5;
+  }
+  .quran-table tr:nth-child(even) td { background: rgba(212,175,55,0.04); }
+  .quran-table tr:hover td { background: rgba(212,175,55,0.08); }
+  .quran-table .juz-cell { font-family: 'Amiri', serif; font-size: 1rem; font-weight: 700; color: var(--gold); }
+  .quran-table .section-cell { color: #c8e6c9; font-weight: 500; text-align: right; }
+
+  /* ===== TABS ===== */
+  .view-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 40px;
+    border-radius: 50px;
+    overflow: hidden;
+    border: 1px solid rgba(212,175,55,0.3);
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .view-tab {
+    padding: 12px 28px;
+    background: transparent;
+    border: none;
+    color: var(--cream);
+    font-family: 'Tajawal', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0.6;
+  }
+  .view-tab.active {
+    background: var(--gold);
+    color: var(--green-deep);
+    opacity: 1;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 50px 20px;
+    border-top: 1px solid rgba(212,175,55,0.15);
+    margin-top: 60px;
+  }
+  .footer-ayah {
+    font-family: 'Scheherazade New', serif;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--gold);
+    line-height: 2;
+    margin-bottom: 12px;
+    text-shadow: 0 0 20px rgba(212,175,55,0.3);
+  }
+  .footer-note {
+    font-size: 0.8rem;
+    color: var(--green-pale);
+    opacity: 0.6;
+    font-weight: 300;
+  }
+
+  /* ===== SHARE BTN ===== */
+  .share-bar {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    display: flex;
+    gap: 10px;
+    background: rgba(13,51,32,0.9);
+    border: 1px solid rgba(212,175,55,0.3);
+    border-radius: 50px;
+    padding: 10px 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+  .share-btn {
+    padding: 8px 20px;
+    border-radius: 50px;
+    border: none;
+    background: var(--gold);
+    color: var(--green-deep);
+    font-family: 'Tajawal', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .share-btn:hover { background: var(--gold-light); transform: scale(1.05); }
+  .print-btn {
+    padding: 8px 20px;
+    border-radius: 50px;
+    border: 1px solid rgba(212,175,55,0.3);
+    background: transparent;
+    color: var(--cream);
+    font-family: 'Tajawal', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .print-btn:hover { background: rgba(255,255,255,0.05); }
+
+  .expand-all-btn {
+    display: block;
+    margin: 0 auto 20px;
+    padding: 8px 24px;
+    border-radius: 50px;
+    border: 1px solid rgba(212,175,55,0.3);
+    background: transparent;
+    color: var(--gold);
+    font-family: 'Tajawal', sans-serif;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .expand-all-btn:hover { background: rgba(212,175,55,0.1); }
+
+  /* ===== PROGRESS BAR ===== */
+  .progress-bar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: rgba(255,255,255,0.05);
+    z-index: 200;
+  }
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--green-light));
+    transition: width 0.1s ease;
+    width: 0%;
+  }
+
+  @media print {
+    .stars, .moon-container, .share-bar, .progress-bar-container { display: none !important; }
+    .day-body { display: grid !important; }
+    body { background: white; color: black; }
+    .day-card { page-break-inside: avoid; border: 1px solid #ccc; }
+  }
+
+  /* Separator */
+  .sep {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212,175,55,0.3), transparent);
+    margin: 50px 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar-container"><div class="progress-bar" id="prog"></div></div>
+<div class="stars" id="stars"></div>
+<div class="moon-container"><div class="moon"></div></div>
+
+<header>
+  <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+  <div class="header-ornament">✦ ✦ ✦</div>
+  <h1>برنامج رمضان المبارك</h1>
+  <div class="subtitle">ثلاثون يوماً · ثلاثة دروس يومية · ومراجعة كتاب الله الكريم</div>
+
+  <div class="pillars">
+    <div class="pillar fajr"><span class="pillar-icon">🌙</span> الفجر — قضايا الأسرة</div>
+    <div class="pillar asr"><span class="pillar-icon">☀️</span> العصر — أعمال القلوب</div>
+    <div class="pillar isha"><span class="pillar-icon">🌟</span> العشاء — الزهد والرقائق</div>
+    <div class="pillar quran"><span class="pillar-icon">📖</span> مراجعة القرآن — جزء يومياً</div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- VIEW TABS -->
+  <div class="view-tabs">
+    <button class="view-tab active" onclick="switchView('days')">الجدول اليومي</button>
+    <button class="view-tab" onclick="switchView('overview')">نظرة عامة</button>
+    <button class="view-tab" onclick="switchView('quran')">مراجعة القرآن</button>
+  </div>
+
+  <!-- DAILY VIEW -->
+  <div id="view-days">
+    <div class="week-nav" id="weekNav"></div>
+    <button class="expand-all-btn" id="expandAllBtn" onclick="toggleExpandAll()">＋ فتح جميع الأيام</button>
+    <div class="days-grid" id="daysGrid"></div>
+  </div>
+
+  <!-- OVERVIEW TABLE -->
+  <div id="view-overview" style="display:none">
+    <div class="section-header">
+      <div class="section-title">جميع موضوعات الثلاثين يوماً</div>
+      <div class="ornament-line">✦</div>
+      <div class="section-sub">جدول شامل للمراجعة السريعة</div>
+    </div>
+    <div class="table-wrapper">
+      <table class="full-table" id="overviewTable"></table>
+    </div>
+  </div>
+
+  <!-- QURAN TABLE -->
+  <div id="view-quran" style="display:none">
+    <div class="section-header">
+      <div class="section-title">جدول مراجعة القرآن الكريم</div>
+      <div class="ornament-line">✦</div>
+      <div class="section-sub">مراجعة أول ربع من كل جزء على مدار الثلاثين يوماً</div>
+    </div>
+    <div class="table-wrapper">
+      <table class="quran-table" id="quranTable"></table>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-ayah">شَهْرُ رَمَضَانَ الَّذِي أُنزِلَ فِيهِ الْقُرْآنُ هُدًى لِّلنَّاسِ وَبَيِّنَاتٍ مِّنَ الْهُدَى وَالْفُرْقَانِ</div>
+  <div class="footer-note">رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنتَ السَّمِيعُ الْعَلِيمُ</div>
+</footer>
+
+<div class="share-bar">
+  <button class="share-btn" onclick="copyLink()">🔗 مشاركة الرابط</button>
+  <button class="print-btn" onclick="window.print()">طباعة</button>
+</div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const fajrTopics = [
+  "حق الزوجة في الحياة الزوجية السعيدة",
+  "التربية الإيمانية للأبناء في الأسرة",
+  "حل النزاعات الزوجية بالحكمة والصبر",
+  "دور الأب في بناء شخصية الأبناء",
+  "العدل بين الأبناء ومخاطر التفضيل",
+  "الرحمة في التعامل الأسري اليومي",
+  "حقوق الوالدين وكيفية البر بهم",
+  "اختيار الزوج الصالح والزوجة الصالحة",
+  "المشكلات الزوجية الشائعة وحلولها",
+  "الطلاق: أسبابه وكيفية تجنبه",
+  "تربية الأبناء على القرآن والسنة",
+  "أسرار الحياة الزوجية الناجحة في القرآن",
+  "الحقوق المالية في الأسرة المسلمة",
+  "علاقة الزوج بأهل زوجته وبالعكس",
+  "الإسلام والأسرة الممتدة: الحدود والحقوق",
+  "تربية الأبناء على القيم والأخلاق الإسلامية",
+  "الحنان والعطف في العلاقة بين الزوجين",
+  "الطاعة الزوجية: مفهومها وحدودها",
+  "الأسرة المسلمة في مواجهة الفضاء الإلكتروني",
+  "دور الأم في صناعة الأجيال",
+  "مشكلة عقوق الوالدين وعلاجها",
+  "الثقة المتبادلة بين أفراد الأسرة",
+  "تأثير الرزق الحلال على الأسرة والأبناء",
+  "الرحمة النبوية في التعامل مع الأسرة",
+  "الغيرة في الإسلام: المحمود والمذموم",
+  "أثر التدين في استقرار الحياة الأسرية",
+  "السكن والمودة: أسرار قرآنية للحياة الزوجية",
+  "الأسرة في المحن والابتلاءات",
+  "نعمة الذرية الصالحة: كيف نحافظ عليها",
+  "خلاصة: نحو أسرة مسلمة متماسكة ومحبة",
+];
+
+const asrTopics = [
+  "الإخلاص: حقيقته وعلاماته",
+  "التوكل على الله: مفهومه وثماره",
+  "الخشوع في الصلاة وكيفية تحصيله",
+  "الرجاء والخوف: ميزان القلب المؤمن",
+  "التوبة والإنابة: أسرارها وشروطها",
+  "الشكر: أسراره وكيف يُحيي القلب",
+  "الصبر: أنواعه وفضله وأسراره",
+  "المحبة لله: أسسها وعلاماتها",
+  "الزهد في الدنيا وأثره على القلب",
+  "اليقين وأثره في ثبات القلب",
+  "المراقبة: الشعور الدائم بنظر الله",
+  "التواضع: مفهومه وعلاماته وثماره",
+  "الإنابة: الرجوع إلى الله في كل أمر",
+  "الرضا بقضاء الله: سر السعادة الحقيقية",
+  "الخشية: الفرق بين الخوف والخشية",
+  "الأنس بالله ولذة المناجاة",
+  "التعلق بالله ومجاهدة تعلق القلب بالدنيا",
+  "المحاسبة: كيف تحاسب نفسك كل يوم",
+  "الإحسان: العبادة كأنك تراه",
+  "التفويض: إسناد الأمور كلها إلى الله",
+  "القلب السليم: مواصفاته وكيف نصله",
+  "طهارة القلب من الأمراض: الحسد والكبر والحقد",
+  "الوجل: الرهبة من الله في القرآن الكريم",
+  "الإخبات: الطمأنينة العميقة في القلب",
+  "الشوق إلى لقاء الله",
+  "التقوى: لبّ أعمال القلوب",
+  "الغنى والفقر القلبي",
+  "التبتل: الانقطاع إلى الله",
+  "تزكية النفس على مدار العام",
+  "خلاصة: أعمال القلوب طريق الفلاح",
+];
+
+const ishaTopics = [
+  "الزهد في الدنيا وتذكر الآخرة",
+  "مقامات الرقائق: البكاء من خشية الله",
+  "تأمل في الموت وما بعده",
+  "القبر: حقيقته وأسئلته وأحواله",
+  "يوم القيامة: أهواله ومشاهده",
+  "الجنة: وصفها ونعيمها وكيف تشتاق إليها",
+  "النار: تحذير ووقاية",
+  "الأعمال الصالحة المنسية التي تحيي القلب",
+  "فضل العلم وتلاوة القرآن",
+  "فضل الليل وقيامه",
+  "الاستغفار: سر من أسرار رقة القلب",
+  "التفكر في خلق الله وعظمته",
+  "أهل الزهد في السيرة النبوية",
+  "دروس من أقوال السلف في الزهد",
+  "لا تغتر بالدنيا: آيات وأحاديث في التزهيد",
+  "التقليل من الطعام وأثره على روحانية القلب",
+  "الانتفاع بالمصائب والابتلاءات",
+  "الخلوة بالله: كنز المتقين",
+  "التسبيح والذكر: غذاء الروح",
+  "أثر الذنوب على القلب والعمل",
+  "السيرة النبوية: دروس في الزهد والرقة",
+  "أحوال الصالحين عند الموت",
+  "مراقبة النعم ومحاسبة النفس",
+  "الحنين إلى الجنة في آيات القرآن",
+  "الخشوع بين يدي الله في ليل رمضان",
+  "فضل الدموع والبكاء من خشية الله",
+  "آيات الوعيد وأثرها في تليين القلوب",
+  "السلف الصالح وعبادتهم في رمضان",
+  "مع الموت: قصص وعبر",
+  "خلاصة رمضان: نحو قلب جديد",
+];
+
+const quranData = [
+  { juz: 1,  section: "البقرة ١ - ٧٤",                   from: "الفاتحة",       note: "بدء السور المدنية الكبرى" },
+  { juz: 2,  section: "البقرة ١٤٢ - ٢٠٢",               from: "البقرة ١٤٢",    note: "تحويل القبلة والجهاد" },
+  { juz: 3,  section: "البقرة ٢٥٣ - آل عمران ٤٦",       from: "البقرة ٢٥٣",   note: "فضل الإنفاق وآل عمران" },
+  { juz: 4,  section: "آل عمران ٩٣ - ١٥٢",              from: "آل عمران ٩٣",  note: "غزوة أُحُد والثبات" },
+  { juz: 5,  section: "النساء ٢٤ - ٨٧",                 from: "النساء ٢٤",    note: "أحكام النكاح والأسرة" },
+  { juz: 6,  section: "النساء ١٤٨ - المائدة ٣٢",         from: "النساء ١٤٨",   note: "أهل الكتاب والعهود" },
+  { juz: 7,  section: "المائدة ٨٢ - ١٢٠",               from: "المائدة ٨٢",   note: "أولياء المؤمنين وعيسى" },
+  { juz: 8,  section: "الأنعام ١١١ - ١٦٥",              from: "الأنعام ١١١",  note: "التوحيد والرسالة" },
+  { juz: 9,  section: "الأعراف ٨٨ - ١٤٧",               from: "الأعراف ٨٨",   note: "قصص الأنبياء" },
+  { juz: 10, section: "الأنفال ٤١ - ٧٥",                from: "الأنفال ٤١",   note: "الغنائم وأحكام الحرب" },
+  { juz: 11, section: "التوبة ٩٣ - يونس ٢٥",             from: "التوبة ٩٣",    note: "المنافقون ونعيم الجنة" },
+  { juz: 12, section: "هود ٦ - ٦٠",                     from: "هود ٦",        note: "قصة نوح وهود وصالح" },
+  { juz: 13, section: "يوسف ٥٣ - ١٠١",                  from: "يوسف ٥٣",      note: "تفسير الأحلام واللقاء" },
+  { juz: 14, section: "الحجر ١ - ٤٨",                   from: "الحجر ١",      note: "إبليس وخلق الإنسان" },
+  { juz: 15, section: "الإسراء ١ - ٤٤",                 from: "الإسراء ١",    note: "الإسراء والمعراج" },
+  { juz: 16, section: "الكهف ٧٥ - ١١٠",                 from: "الكهف ٧٥",     note: "ذو القرنين ويأجوج" },
+  { juz: 17, section: "الأنبياء ١ - ٥٠",                from: "الأنبياء ١",   note: "قصص الأنبياء الكرام" },
+  { juz: 18, section: "المؤمنون ١ - ٥٠",                from: "المؤمنون ١",   note: "صفات المؤمنين الفلاح" },
+  { juz: 19, section: "الفرقان ٢١ - ٦٠",                from: "الفرقان ٢١",   note: "شُبُهات المشركين والرد" },
+  { juz: 20, section: "النمل ٥٦ - ٩٣",                  from: "النمل ٥٦",     note: "قصة لوط وسليمان" },
+  { juz: 21, section: "العنكبوت ٤٦ - الروم ٣٠",          from: "العنكبوت ٤٦",  note: "الابتلاء والنصر الرباني" },
+  { juz: 22, section: "الأحزاب ٣١ - ٧٣",                from: "الأحزاب ٣١",   note: "أحكام النبي وأهل البيت" },
+  { juz: 23, section: "يس ٢٨ - الصافات ١",               from: "يس ٢٨",        note: "البعث وتصديق الرسل" },
+  { juz: 24, section: "الزمر ٣٢ - ٧٥",                  from: "الزمر ٣٢",     note: "التوكل والمغفرة الإلهية" },
+  { juz: 25, section: "فصلت ٤٧ - الشورى ٢٦",             from: "فصلت ٤٧",      note: "الشورى والوحي" },
+  { juz: 26, section: "الأحقاف ١ - محمد ١",              from: "الأحقاف ١",    note: "دعوة عاد وجن القرآن" },
+  { juz: 27, section: "الذاريات ٣١ - الطور ١",           from: "الذاريات ٣١",  note: "ضيافة إبراهيم للملائكة" },
+  { juz: 28, section: "المجادلة ١ - ١٣",                 from: "المجادلة ١",   note: "الظهار وأحكام المجادلة" },
+  { juz: 29, section: "الملك ١ - ١٥",                   from: "الملك ١",      note: "الملك وخلق الموت والحياة" },
+  { juz: 30, section: "النبأ ١ - ٢٠",                   from: "النبأ ١",      note: "النبأ العظيم وأهوال القيامة" },
+];
+
+// ============================================================
+// STARS
+// ============================================================
+(function buildStars() {
+  const c = document.getElementById('stars');
+  for (let i = 0; i < 120; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const sz = Math.random() * 2.5 + 0.5;
+    s.style.cssText = `width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--dur:${2+Math.random()*4}s;--delay:${Math.random()*4}s;`;
+    c.appendChild(s);
+  }
+})();
+
+// ============================================================
+// PROGRESS BAR
+// ============================================================
+window.addEventListener('scroll', () => {
+  const el = document.documentElement;
+  const pct = (el.scrollTop / (el.scrollHeight - el.clientHeight)) * 100;
+  document.getElementById('prog').style.width = pct + '%';
+});
+
+// ============================================================
+// BUILD WEEK NAV
+// ============================================================
+const weekNav = document.getElementById('weekNav');
+['الأسبوع الأول','الأسبوع الثاني','الأسبوع الثالث','الأسبوع الرابع','الأيام الأخيرة'].forEach((w, i) => {
+  const btn = document.createElement('button');
+  btn.className = 'week-btn' + (i === 0 ? ' active' : '');
+  btn.textContent = w;
+  btn.onclick = () => {
+    document.querySelectorAll('.week-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    buildDays(i);
+  };
+  weekNav.appendChild(btn);
+});
+
+// ============================================================
+// BUILD DAYS
+// ============================================================
+function buildDays(weekIdx) {
+  const ranges = [[1,7],[8,14],[15,21],[22,28],[29,30]];
+  const [start, end] = ranges[weekIdx];
+  const grid = document.getElementById('daysGrid');
+  grid.innerHTML = '';
+
+  for (let d = start; d <= end; d++) {
+    const i = d - 1;
+    const card = document.createElement('div');
+    card.className = 'day-card';
+    card.innerHTML = `
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-number-badge">${d}</div>
+        <div class="day-title-area">
+          <div class="day-label">اليوم ${toArabicNum(d)} من رمضان</div>
+          <div class="day-preview">${fajrTopics[i]} · ${asrTopics[i]}</div>
+        </div>
+        <div class="day-chevron">▾</div>
+      </div>
+      <div class="day-body">
+        <div class="lessons-row">
+          <div class="lesson-card fajr">
+            <div class="lesson-time"><span>🌙</span> الفجر</div>
+            <div class="lesson-category">قضايا الأسرة المسلمة</div>
+            <div class="lesson-title">${fajrTopics[i]}</div>
+          </div>
+          <div class="lesson-card asr">
+            <div class="lesson-time"><span>☀️</span> العصر</div>
+            <div class="lesson-category">أعمال القلوب</div>
+            <div class="lesson-title">${asrTopics[i]}</div>
+          </div>
+          <div class="lesson-card isha">
+            <div class="lesson-time"><span>🌟</span> العشاء</div>
+            <div class="lesson-category">الزهد والرقائق</div>
+            <div class="lesson-title">${ishaTopics[i]}</div>
+          </div>
+        </div>
+        <div class="quran-row">
+          <span class="quran-icon">📖</span>
+          <span class="quran-label">مراجعة القرآن</span>
+          <span class="quran-content">الجزء ${toArabicNum(d)} — ${quranData[i].section}</span>
+          <span class="quran-range">${quranData[i].note}</span>
+        </div>
+      </div>
+    `;
+    grid.appendChild(card);
+    // stagger animation
+    card.style.animationDelay = ((d - start) * 0.07) + 's';
+  }
+}
+buildDays(0);
+
+function toggleDay(header) {
+  header.parentElement.classList.toggle('open');
+}
+
+let allExpanded = false;
+function toggleExpandAll() {
+  const cards = document.querySelectorAll('.day-card');
+  allExpanded = !allExpanded;
+  cards.forEach(c => c.classList.toggle('open', allExpanded));
+  document.getElementById('expandAllBtn').textContent = allExpanded ? '− إغلاق جميع الأيام' : '＋ فتح جميع الأيام';
+}
+
+// ============================================================
+// OVERVIEW TABLE
+// ============================================================
+(function buildOverview() {
+  const t = document.getElementById('overviewTable');
+  t.innerHTML = `<thead><tr>
+    <th>اليوم</th>
+    <th>الفجر — قضايا الأسرة</th>
+    <th>العصر — أعمال القلوب</th>
+    <th>العشاء — الزهد والرقائق</th>
+  </tr></thead>`;
+  const tbody = document.createElement('tbody');
+  for (let i = 0; i < 30; i++) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="day-num">${toArabicNum(i+1)}</td>
+      <td class="fajr-cell">${fajrTopics[i]}</td>
+      <td class="asr-cell">${asrTopics[i]}</td>
+      <td class="isha-cell">${ishaTopics[i]}</td>
+    `;
+    tbody.appendChild(tr);
+  }
+  t.appendChild(tbody);
+})();
+
+// ============================================================
+// QURAN TABLE
+// ============================================================
+(function buildQuran() {
+  const t = document.getElementById('quranTable');
+  t.innerHTML = `<thead><tr>
+    <th>اليوم</th>
+    <th>الجزء</th>
+    <th>المقطع المقرر مراجعته (الربع الأول)</th>
+    <th>بداية من</th>
+    <th>ملاحظة</th>
+  </tr></thead>`;
+  const tbody = document.createElement('tbody');
+  quranData.forEach((q, i) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="juz-cell">${toArabicNum(i+1)}</td>
+      <td class="juz-cell">${toArabicNum(q.juz)}</td>
+      <td class="section-cell">${q.section}</td>
+      <td>${q.from}</td>
+      <td style="color:var(--green-pale);font-size:0.8rem;">${q.note}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+  t.appendChild(tbody);
+})();
+
+// ============================================================
+// VIEW SWITCH
+// ============================================================
+function switchView(view) {
+  ['days','overview','quran'].forEach(v => {
+    document.getElementById('view-'+v).style.display = (v === view) ? 'block' : 'none';
+  });
+  document.querySelectorAll('.view-tab').forEach((btn, i) => {
+    btn.classList.toggle('active', ['days','overview','quran'][i] === view);
+  });
+  window.scrollTo({ top: 200, behavior: 'smooth' });
+}
+
+// ============================================================
+// ARABIC NUMBERS
+// ============================================================
+function toArabicNum(n) {
+  return String(n).replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+}
+
+// ============================================================
+// COPY LINK
+// ============================================================
+function copyLink() {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    const btn = document.querySelector('.share-btn');
+    btn.textContent = '✓ تم النسخ!';
+    setTimeout(() => btn.innerHTML = '🔗 مشاركة الرابط', 2000);
+  });
+}
+</script>
+</body>
+</html>
